@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ postednotices }}{% endblock %}
+{% block body_block %}
+
+	  <div class="notices">
+
+        <ul class="noticetextUl">
+        	<h1>Latest Notices</h1>
+              {% for leave in leaves %}
+			  <li>
+        		<div class="noticedate">
+        			<h3>{{ leave.requestDate | date:'b'}} <br> <span> {{ leave.requestDate.day }} </span></h3>
+        		</div>
+        		<div class="leavedata">
+                    <p> Requested By : {{ 'Rajeev' }}  <br>
+                        Duration: {{ leave.firstDate }} to {{ leave.lastDate}} <br>
+                        Reason: {{ leave.reason }}
+                    </p>
+
+    			</div>
+                <div class ="smallbutton">
+
+                <form action="approve_leave" method="post">
+                {% csrf_token %}
+                    <input type="hidden" name="leaveId" value= {{ leave.id }}>
+                    <button class="btn" > Approve Leave</button >
+                </form>
+                </div>
+			</li>
+        {% endfor %}
+		</ul>
+	</div>
+{% endblock %}

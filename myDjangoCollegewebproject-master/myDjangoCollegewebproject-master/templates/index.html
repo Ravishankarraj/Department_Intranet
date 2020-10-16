@@ -1,0 +1,117 @@
+﻿{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MACS Department</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="MACS WEB INTRANET">
+	<meta name="keywords" content="macs, education, nit, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	<link href= "{% static "img/favicon.ico" %}" rel= "shortcut icon" />
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href= {% static "css/bootstrap.min.css" %}/>
+	<link rel="stylesheet" href={% static  "css/font-awesome.min.css" %} />
+	<link rel="stylesheet" href= "{% static "css/owl.carousel.css" %}"/>
+	<link rel="stylesheet" href= {% static "css/style.css"%}/>
+
+
+
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="site-logo">
+						<img src="{% static "img/logo1.png" %} "  alt="logo image" width="80%" />
+					</div>
+					<div class="nav-switch">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<a href="" class= "site-btn header-btn">Contact Us</a>
+					<nav class="main-menu text-white" >
+						<h3> National Institute of Technology Karnataka <br> MACS Department</h3>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+
+	<!-- Hero section -->
+	<section class="hero-section set-bg" data-setbg= {% static "img/bg.jpg" %}>
+		<div class="container">
+			<div class="hero-text text-white">
+				<h2>Get Your all notices here!</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<form class="intro-newslatter" action='login' method = "post">
+                        {% csrf_token %}
+						<input type="text"  name="username" placeholder="Username">
+						<input type="password"  name="password" placeholder="Password">
+						<button class="site-btn">Sign Up Now</button>
+                         <div>
+                    {% for message in messages %}
+                        <font color="red">{{ message }}</font>
+                    {% endfor %}
+                </div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+	<!-- footer section -->
+	<footer class="footer-section spad pb-0">
+		<div class="footer-top">
+			<div class="footer-warp">
+				<div class="row">
+					<div class="widget-item">
+						<h4>Contact Info</h4>
+						<ul class="contact-list">
+							<li>admin <br>NITK MACS Department</li>
+							<li>+91 9191919919</li>
+							<li>yourmail@gmail.com</li>
+						</ul>
+					</div>
+
+
+
+			</div>
+		</div>
+        </div>
+	</footer> 
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src= {% static "js/jquery-3.2.1.min.js" %}></script>
+	<script src={% static "js/bootstrap.min.js" %}></script>
+	<script src={% static "js/mixitup.min.js" %}></script>
+	<script src={% static "js/circle-progress.min.js" %}></script>
+	<script src={% static "js/owl.carousel.min.js" %}></script>
+	<script src={% static "js/main.js" %}></script>
+</body>
+</html>

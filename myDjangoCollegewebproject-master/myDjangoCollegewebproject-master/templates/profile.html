@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ profile }}{% endblock %}
+{% block body_block %}
+
+     <div class="card">
+     	 <h2>Welcome</h2>
+  		<img src="F:\Downloads\img (2).jpg" alt="">
+  		<h2>{{username.username}}</h2>
+ 		 <p class="title"> {{ designation }} </p>
+ 		 <div style="margin: 24px 0;">
+    		<a href="#"><i class="fa fa-dribbble"></i></a> 
+    		<a href="#"><i class="fa fa-twitter"></i></a>  
+    		<a href="#"><i class="fa fa-linkedin"></i></a>  
+    		<a href="#"><i class="fa fa-facebook"></i></a> 
+  		</div>
+  		<p><button class="buttonprofile">Edit Profile</button></p>
+     </div>
+      <div class="info">
+
+     	<h2> Posted notices : {{ posted_notices }}</h2>
+         {% if designation == "Head of department" %}
+     	    <h2> Pending notices :  {{ pending_notices }}</h2>
+     	    <h2> Leave application :{{ leave_application }}</h2>
+        {% endif %}
+     </div>
+ {% endblock %}

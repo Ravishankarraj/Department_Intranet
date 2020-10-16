@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ postednotices }}{% endblock %}
+{% block body_block %}
+	
+	  <div class="notices">
+
+        <ul class="noticetextUl">
+        	<h1>Latest Notices</h1>
+              {% for notice in notices %}
+                    {% if notice.isApproved == True %}
+			<li>
+        		<div class="noticedate">
+        			<h3>{{ notice.date | date:'b'}} <br> <span> {{ notice.date.day }} </span></h3>
+        		</div>
+        		<a href="#">
+                     {{ notice.subject }}
+                    <a href="{{ notice.pdf.url}}">Download pdf file</a>
+    			</a>
+                <div class ="smallbutton">
+                <form action="delete" method="post" >
+                    {% csrf_token %}
+                     <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                     <button class="btn"> Delete </button >
+                </form>
+                <form action="edit" method="post">
+                {% csrf_token %}
+                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                    <button class="btn" > Edit </button >
+                </form>
+                </div>
+			</li>
+            {% endif %}
+        {% endfor %}
+		</ul>
+	</div>
+{% endblock %}

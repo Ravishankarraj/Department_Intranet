@@ -1,0 +1,485 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+body{
+	background-color: #e3e7f1;
+}
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 15vh;
+	background-color: #1a2849;
+	font-family: 'Poppins', sans-serif;
+}
+.logo{
+	color: #ecfcff;
+	letter-spacing: 1px;
+	font-size: 18px;
+
+}
+.nav-links {
+	display: flex;
+	justify-content: space-around;
+	width: 50%;
+}
+.nav-links li {
+	list-style: none;
+
+}
+.nav-links a{
+	color:#ecfcff;
+	text-decoration: none; 
+	width: 40%;
+	letter-spacing: 3px;
+
+	font-weight: bold;
+	font-size: 15px;
+
+}
+.nav-links a:hover{
+	color:#ecfcff;
+	text-decoration: none; 
+	width: 40%;
+	letter-spacing: 3px;
+	font-weight: bold;
+	font-size: 18px;
+
+}
+.burger{
+	display: none;
+	cursor: pointer;
+}
+.burger div{
+	width:25px;
+	height: 3px;
+	background-color: #ecfcff;
+	margin: 5px;
+	transition: all 0.3s ease;
+
+}
+@media screen and (max-width:1024px){
+	body{
+		overflow-x: hidden;
+	}
+	.nav-links{
+		
+		position: absolute;
+		right: 0px;
+		height: 52vh;
+		top:12vh;
+		background-color: #1a2849;
+		margin-left: 15px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 30%;
+		transform: translateX(100%);
+		transition: transform 0.5s ease-in;
+		z-index:2;
+		
+	}
+	.nav-links li{
+		opacity: 0;
+	}
+	.burger{
+		display: block;
+	}
+}
+
+.nav-active {
+
+	transform: translateX(0%);
+
+}
+@keyframes navLinkFade{
+	from{
+		opacity: 0;
+		transform: translateX(50px);
+	}
+	to{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+.toggle .line1{
+	transform: rotate(-45deg) translate(-5px,6px);
+}
+.toggle .line2{
+	opacity: 0;
+}
+.toggle .line3{
+	transform: rotate(45deg) translate(-5px,-6px);
+}
+
+.body-content{
+	height: 50vh;
+	display: flex;
+	margin-top: 80px;
+	margin-bottom: 50px;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;;
+
+}
+.form{
+	width: 35%;
+	position: relative;
+	padding-top: 0px;
+	height: 50px;
+	overflow: hidden;
+}
+.form input[type=text], button{
+	border:none;
+}
+.form input{
+	width: 100%;
+	height: 100%;
+	color: #595f6e;
+	 background-color: #e3e7f1;
+	padding-top: 20px;
+	border: none;
+	outline: none;
+}
+.form label{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	border-bottom: 1px solid black;
+}
+.form label::after {
+	content: " ";
+	position: absolute;
+	left: 0px;
+	bottom: -1px;
+	height:100%;
+	width: 100%;
+	border-bottom: 3px solid #1a2849;
+	transform: translateX(-100%);
+	transition: transform 0.5s ease-in;
+}
+.content-name{
+	position: absolute;
+	bottom: 5px;
+	left: 0px;
+	transition: all 0.3s ease;
+}
+.form input:focus + .label-name .content-name, 
+.form input:valid + .label-name .content-name{
+	transform: translateY(-150%);
+	font-size: 15px;
+	font-weight: bold;
+	color: #1a2849;
+}
+.form input:focus + .label-name::after,
+.form input:valid + .label-name::after{
+	transform: translateX(0%);
+}
+.button{
+	font-size: 20px;
+	width:50%;
+	margin-left: 20%;
+	height:100%;
+	border-radius: 80px;
+	text-decoration: none;
+	border: 2px solid black;
+	overflow: hidden;
+	transition: 1s;
+}
+.button:hover{
+	background: #1a2849;
+	cursor: pointer;
+
+}
+.button:active{
+	background: #6807f9;
+	overflow: hidden;
+}
+
+/* Notice view style */
+.notices{
+	 border-radius: 5px;
+  	 padding: 40px;
+	 background-color: #e3e7f1;
+}
+.noticetextUl {
+	margin-top:20px;
+	padding: 20px;
+	position:absolute;
+	left:50%;
+	top: 20%;
+	transform: translate(-50%);
+	width:70%;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 15px 50px rgba(0,0,0,-2);
+}
+h1{
+	margin:0 0 0 0 10px;
+	padding-bottom: 10px;
+	font-size:24px;
+	border-bottom: 2px solid #315b96 ;
+}
+.noticetextUl li{
+	list-style: none;
+	position: relative;
+	padding: 4px;
+	border-radius: 4px;
+	border-bottom: 1px solid #315b96;
+}
+.noticetextUl li a {
+	color: #262626;
+	text-decoration: none;
+	display: block;
+	margin-top: 5px;
+	padding-left: 80px;
+	height: 80px;
+}
+.noticetextUl li .noticedate{
+	position: absolute;
+	top: 7px;
+	left:5px;
+	width: 60px;
+	text-align: center;
+}
+.noticetextUl li .noticedate:before{
+	content: "";
+	position: absolute;
+	top:0;
+	left: 0;
+	width:100%;
+	height:0;
+	border-top: 27px solid #3e64ff;
+	border-bottom: 50px solid #e4e7e7;
+	z-index: 1;
+	border-radius: 5px;
+}
+.noticetextUl li .noticedate h3{
+	position: relative;
+	z-index:2;
+	margin-top: -6px;
+	font-size: 18px;
+	color: #fff;
+	line-height: 36px;
+}
+.noticetextUl li .noticedate h3 span{
+	
+	font-size: 36px;
+	color: #262626;
+}
+.noticetextUl li .noticedate p{
+	font-size: 18px;
+
+}
+.noticetextUl li:hover{
+	background:#8186d5;
+}
+.noticetextUl li:a hover{
+	background:#663d8b;
+}
+
+/* Notice upload form */
+.row input[type=text],select, textarea {
+  width: 100%;
+  padding: 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.row label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.row input[type=submit]{
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  margin-right: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  float: right;
+  width:20%;
+}
+
+.row input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #e3e7f1;
+  padding: 40px;
+ 
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 16px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+ 
+}
+
+/*profile card */
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	min-width:300px;
+  	max-width: 300px;
+	margin: 60px 10px 20px 100px;
+	float: left;
+	text-align: center;
+	font-family: arial, serif;
+}
+.title {
+  color: grey;
+  font-size: 18px;
+}
+.card img{
+	padding: 20px;
+    border-radius: 50%;
+}
+.buttonprofile {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+.card a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+.card button:hover, a:hover {
+  opacity: 0.7;
+}
+.info{
+	float: right;
+	font-family: arial;
+	margin-right: 30%;
+	margin-top:10%;
+	line-height: 250%;
+}
+
+.btn{
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.btn:hover {
+  background-color: #4f81c7;
+  font-size: 18px;
+}
+
+/* drop down navbar*/
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  color: white;
+  letter-spacing: 1.5px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown:hover .dropbtn, .dropbtn:focus {
+  color:#ecfcff;
+	text-decoration: none;
+	width: 20%;
+	letter-spacing: 2px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1a2849;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+	font-size: 14px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+
+.show {
+  display: block;
+}
+.smallbutton{
+	display: flex;
+}
+.leaveheader {
+	margin-top: 50px;
+	font-weight: bold;
+	color: #1a2849;
+	text-align: center;
+}
+.leavedata p{
+	text-decoration: none;
+	display: block;
+	margin-top: 5px;
+	padding-left: 80px;
+	font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+	line-height: 1.5;
+	height: auto;
+	color: #002752;
+}

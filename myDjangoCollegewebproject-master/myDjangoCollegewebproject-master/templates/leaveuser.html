@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ postnotice }}{% endblock %}
+{% block body_block %}
+        <div class="leaveheader"> <h2> Total Leave taken : {{ totalLeave }}</h2></div>
+
+	 	<div class="container">
+	 		<h1> Leave Application</h1>
+ 		 <form action="leavemanagement" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <input type="hidden" name="noticeId" value= {{ notice.0.id }}>
+    		<div class="row">
+     			 <div class="col-25">
+       				 <label for="lcategory">Leave Category</label>
+     			 </div>
+     			 <div class="col-75">
+                    <input type="radio" id ="lcategory" name="lcategory" value="casual" checked> Casual<br>
+                    <input type="radio" id ="lcategory" name="lcategory" value="earned"> Earned <br>
+                     <input type="radio" id ="lcategory" name="lcategory" value="commuted"> Commuted <br>
+                     <input type="radio" id ="lcategory" name="lcategory" value="compensatory"> Compensatory
+     			 </div>
+    		</div>
+		    <div class="row">
+		      <div class="col-25">
+		        <label for="reason">Reason for absence</label>
+		      </div>
+		      <div class="col-75">
+		        <textarea id="reason" name="reason" placeholder="write something...!" style="height:200px" required></textarea>
+		      </div>
+		    </div>
+
+
+		     <div class="row">
+		      <div class="col-25">
+		        <label for="f_date">Date of first day of Leave</label>
+		      </div>
+		      <div class="col-75">
+		        <input id="f_date" type="date" name="firstdate" required><br><br>
+		      </div>
+
+              <div class="row">
+		      <div class="col-25">
+		        <label for="l_date">Date of Last day of Leave</label>
+		      </div>
+		      <div class="col-75">
+		        <input id="l_date" type="date" name="lastdate" required><br><br>
+		      </div>
+		    </div>
+
+
+		    <div class="row">
+		      <input type="submit" value="Submit">
+		    </div>
+
+             </div>
+  		</form>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{{ postnotice }}{% endblock %}
+{% block body_block %}
+	 	<div class="container">
+	 		<h1> Upload Notice</h1>
+ 		 <form action="postnotice" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <input type="hidden" name="noticeId" value= {{ notice.0.id }}>
+    		<div class="row">
+     			 <div class="col-25">
+       				 <label for="subject">Subject</label>
+     			 </div>
+     			 <div class="col-75">
+       				 <input type="text" id="subject" name="subject" placeholder="Enter your subject..!" value="{{ notice.0.subject}}">
+     			 </div>
+    		</div>
+		    <div class="row">
+		      <div class="col-25">
+		        <label for="content">Content</label>
+		      </div>
+		      <div class="col-75">
+		        <textarea id="content" name="content" placeholder="write something...!" style="height:200px">{{ notice.0.content}}</textarea>
+		      </div>
+		    </div>
+
+
+		     <div class="row">
+		      <div class="col-25">
+		        <label for="pdf">Upload Pdf</label>
+		      </div>
+		      <div class="col-75">
+		        <input id="pdf" type="file" name="pdfFile" value="{{ notice.0.pdf}}"><br><br>
+		      </div>
+		    </div>
+
+		    <div class="row">
+     			 <div class="col-25">
+       				 <label for="category">Category</label>	 
+     			 </div>
+		     	 <div class="col-75">
+		        	<input  type="checkbox" name="student"  value="{{ True }}"> Student<br>
+                	<input type="checkbox" name="staff"  value="{{ True }}" > Staff<br>
+                    <input type="checkbox" name="teacher"  value="{{ True }}" > Teacher<br>
+                    <input type="checkbox" name="researcher"  value="{{ True }}" > Researcher<br>
+                    <input type="checkbox" name="for_all"  value="{{ True }}" > All<br><br>
+		        </div>
+            </div>
+
+		    <div class="row">
+		      <input type="submit" value="Submit">
+		    </div>
+  		</form>
+       </div>
+{% endblock %}
+
+	
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ login }}{% endblock %}
+{% block body_block %}
+      <form action="login" method="post">
+	 <div class="body-content">
+	 <h1> Log In</h1>
+
+          {% csrf_token %}
+             <div class='form'>
+	 	        <input type = "text" id="username" name="username" autocomplete ="off" required/>
+	 	        <label for="username" class="label-name">
+	 		        <span class="content-name">UserName</span>
+	 	        </label>
+             </div>
+           <div class='form'>
+	 	    <input type="Password" id="Password" name="password" autocomplete ="off" required/>
+	 	    <label for="Password" class="label-name">
+	 		    <span class="content-name">Password</span>
+	 	    </label>
+           </div>
+          <div class='form'>
+	 	    <button class="button">Log In</button>
+          </div>
+          </div>
+      </form>
+       <div class="message" >
+         {% for message in messages %}
+             {{ message }}
+         {% endfor %}
+       </div>
+{% endblock %}

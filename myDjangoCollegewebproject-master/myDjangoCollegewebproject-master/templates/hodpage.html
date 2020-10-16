@@ -1,0 +1,251 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MACS Department Intranet</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="WebUni Education Template">
+	<meta name="keywords" content="webuni, education, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href= "{% static "img/favicon.ico" %}" rel= "shortcut icon" />
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href= {% static "css/bootstrap.min.css" %}/>
+	<link rel="stylesheet" href={% static  "css/font-awesome.min.css" %} />
+	<link rel="stylesheet" href= "{% static "css/owl.carousel.css" %}"/>
+	<link rel="stylesheet" href= {% static "css/style.css"%}/>
+
+
+
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+    <header class="header-section">
+       <div class="hero-text text-white">
+               <img src="{% static "img/logo1.png" %} "  alt="logo image" width="10%" />
+				<h3>National Institute of Technology, Karnataka</h3>
+				<h5>MACS Department</h5>
+                  <h6> {{username.username}} <br>{{ category }}</h6>
+			</div>
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="nav-switch">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<a href= "logout" class= "site-btn header-btn">LogOut</a>
+					<nav class="main-menu">
+						<ul>
+							<li><a href="index">Home</a>
+                            <li><a href="#Posted_Notices">Posted Notices</a></li>
+                                {% if username.is_superuser %}
+                                 <li><a href="#Pending_Notices">Pending Notices</a></li>
+                                 <li><a href="#Post_Notice">Post Notice</a></li>
+                                 <li><a href="blog.html">Leave Management</a></li>
+                                {% endif %}
+
+						</ul>
+					</nav>
+				</div>
+
+			</div>
+		</div>
+	</header>
+    <section class="hero-section set-bg" data-setbg= {% static "img/bg.jpg" %}>
+		<div class="container">
+			<div class="hero-text text-white">
+
+			</div>
+
+		</div>
+	</section>
+	<!-- Pending notices section -->
+    {%   if username.is_superuser %}
+    <a name = "Pending_Notices">
+	<section class="course-section spad">
+		<div class="course-warp">
+            <h7>Pending Notification</h7>
+			<div class="row course-items-area">
+				<!-- Posted notifications -->
+                {% for notice in notices %}
+                    {% if notice.isApproved == False %}
+				        <div class="mix col-lg-3 col-md-4 col-sm-6 finance">
+					        <div class="course-item">
+						        <div class="course-info">
+							        <div class="course-text">
+								        <h5>Date : {{ notice.date }}</h5>
+                                        <h5> Subject :{{ notice.subject }}</h5>
+                                        <div class="students">{{ notice.content }}</div><br>
+
+                                        <div class="students">
+                                            <a href="{{ notice.pdf.url}}">Download pdf file</a>
+                                        </div>
+							        </div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="img/authors/1.jpg"></div>
+								<p>Requested By: <span>Developer</span></p>
+                                <form action="approve" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                                    <button class="site-btn">Approve</button>
+                                </form>
+                                 <form action="edit" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                                    <button class="site-btn">Edit</button>
+                                </form>
+                                 <form action="delete" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                                    <button class="site-btn">Delete</button>
+                                </form>
+							</div>
+						</div>
+					</div>
+				</div>
+                    {% endif %}
+                {% endfor %}
+			</div>
+		</div>
+	</section> </a>
+    {% endif %}
+	<!-- posted notices section end -->
+    <a name = "Posted_Notices">
+    <section class="course-section spad">
+		<div class="course-warp">
+            <h7>Posted Notification</h7>
+			<div class="row course-items-area">
+				<!-- Posted notifications -->
+                {% for notice in notices %}
+                    {% if notice.isApproved == True %}
+				        <div class="mix col-lg-3 col-md-4 col-sm-6 finance">
+					        <div class="course-item">
+						        <div class="course-info">
+							        <div class="course-text">
+								        <h5>Date : {{ notice.date }}</h5>
+                                        <h5> Subject :{{ notice.subject }}</h5>
+                                        <div class="students">{{ notice.content }}</div>
+                                        <div class="students">
+                                            <a href="{{ notice.pdf.url}}">Download pdf file</a>
+                                        </div>
+							        </div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="img/authors/1.jpg"></div>
+								<p>Requested By: <span>Developer</span></p>
+                                 <form action="approve" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                                    <button class="site-btn">Approve</button>
+                                </form>
+                                 <form action="delete" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="noticeId" value= {{ notice.id }}>
+                                    <button class="site-btn">Delete</button>
+                                </form>
+							</div>
+						</div>
+					</div>
+				</div>
+                    {% endif %}
+                {% endfor %}
+			</div>
+		</div>
+    </section></a>
+
+
+
+	<!-- post new notice section -->
+     <a name = "Post_Notice">
+	<section class="signup-section spad">
+		<div class="signup-bg set-bg" data-setbg="img/signup-bg.jpg"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="signup-warp">
+						<div class="section-title text-white text-left">
+							<h3>Post new Notification Here</h3>
+
+						</div>
+						<!-- signup form -->
+						<form class="signup-form" action="postnotice" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+							<input type="text" name="subject" placeholder="Enter Subject">
+                            <textarea  name="content"  placeholder ="Your content goes Here!" ></textarea>
+
+                            <label for="file" class="file-up-btn" >Choose file to upload</label>
+                            <input type="file" id="file" name="pdfFile" class="file-up-btn">
+                            <p>Category: </p>
+                            <input class="site-radio-btn" type="radio" name="student"  value="{{ True }}"> Student<br>
+                            <input class="site-radio-btn" type="radio" name="staff"  value="{{ True }}" > Staff<br>
+                            <input class="site-radio-btn" type="radio" name="teacher"  value="{{ True }}" > Teacher<br>
+                            <input  class="site-radio-btn" type="radio" name="researcher"  value="{{ True }}" > Researcher<br>
+                            <input class="site-radio-btn" type="radio" name="all"  value="{{ True }}" > All<br><br>
+
+							<input type="file" id="v-upload">
+							<button class="site-btn">Post</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section></a>
+	<!-- signup section end -->
+
+
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h3>pending Notices : {{ pending_notices }} </h3><br><br>
+                <h3>Posted Notices  : {{ posted_notices }} </h3><br><br>
+                <h3>Leave application : {{ 0 }} </h3>
+
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+
+
+	<!-- footer section -->
+	<footer class="footer-section spad pb-0">
+		<div class="footer-top">
+			<div class="footer-warp">
+				<div class="row">
+					<div class="widget-item">
+						<h4>Contact Info</h4>
+						<ul class="contact-list">
+							<li>admin <br>NITK MACS Department</li>
+							<li>+91 9191919919</li>
+							<li>yourmail@gmail.com</li>
+						</ul>
+					</div>
+
+
+
+			</div>
+		</div>
+        </div>
+	</footer>
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src= {% static "js/jquery-3.2.1.min.js" %}></script>
+	<script src={% static "js/bootstrap.min.js" %}></script>
+	<script src={% static "js/mixitup.min.js" %}></script>
+	<script src={% static "js/circle-progress.min.js" %}></script>
+	<script src={% static "js/owl.carousel.min.js" %}></script>
+	<script src={% static "js/main.js" %}></script>
+</html>
